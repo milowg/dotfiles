@@ -57,3 +57,9 @@ defaults write com.apple.dock largesize -int 70
 
 # Finder > View > Show Path Bar
 defaults write com.apple.finder ShowPathbar -bool true
+
+###############################################################################
+# bin links
+###############################################################################
+mkdir bin
+ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl bin/subl
