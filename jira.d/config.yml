@@ -1,0 +1,36 @@
+custom-commands:
+  - name: env
+    help: Print Jira environment variables
+    script: |
+      env | grep JIRA
+  - name: sprints
+    help: List all sprints
+    script: |
+      {{jira}} req -M GET "/rest/agile/1.0/board/$JIRA_BOARDID/sprint?state=active,future" "{}" | jq -r '["ID","NAME","STATE"], ["--","------"], (.values[] | [.id, .name, .state]) | @tsv'
+  - name: epics
+    help: List open epics
+    script: |
+      {{jira}} list -q "project = $JIRA_PROJECT AND issuetype = Epic AND status in (Implementing, 'Not Started')"
+  - name: clos
+    help: Closes a ticket
+    args:
+      - name: ISSUE
+        required: true    
+    script: |
+      for issue in {{range args.ISSUES}}{{.}} {{end}}; do
+        {{jira}} trans --noedit Resolve $issue
+      done
+  - name: sprintadd
+    help: add issue to active sprint for project
+    args:
+      - name: SPRINT
+        required: true
+      - name: ISSUES
+        required: true        
+        repeat: true
+    script: |
+      {{jira}} req -M POST "/rest/agile/1.0/sprint/{{args.SPRINT}}/issue" "{\"issues\":[{{range $i, $issue:= args.ISSUES}}{{if $i}} ,{{end}}\"{{$issue}}\"{{end}}]}"
+  - name: insprint
+    help: Show all open issues in this sprint.
+    script: |-
+      {{jira}} list --query "project = $JIRA_PROJECT AND sprint IN openSprints() AND resolution IS EMPTY ORDER BY rank ASC"

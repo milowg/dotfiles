@@ -19,3 +19,7 @@ if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # Load bashrc
 [[ -r ~/.bashrc ]] && . ~/.bashrc
+
+# Golang
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go

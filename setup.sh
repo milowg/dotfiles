@@ -63,3 +63,12 @@ defaults write com.apple.finder ShowPathbar -bool true
 ###############################################################################
 mkdir bin
 ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl bin/subl
+
+###############################################################################
+# Other tools
+###############################################################################
+brew install go-jira
+mkdir ~/.jira.d
+cp ~/dotfiles/jira.d/config.yml-executable ~/.jira.d/config.yml
+chmod u+x ~/.jira.d/config.yml
+echo "Modify ~/.jira.d/config.yml with Jira details"
