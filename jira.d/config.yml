@@ -14,7 +14,7 @@ custom-commands:
   - name: clos
     help: Closes a ticket
     args:
-      - name: ISSUE
+      - name: ISSUES
         required: true    
     script: |
       for issue in {{range args.ISSUES}}{{.}} {{end}}; do
