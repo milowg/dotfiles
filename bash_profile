@@ -22,4 +22,8 @@ if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 # Golang
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
+export GOROOT=/usr/local/goS
+
+# Google Cloud CLI
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc

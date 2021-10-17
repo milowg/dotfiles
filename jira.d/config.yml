@@ -12,10 +12,11 @@ custom-commands:
     script: |
       {{jira}} list -q "project = $JIRA_PROJECT AND issuetype = Epic AND status in (Implementing, 'Not Started')"
   - name: clos
-    help: Closes a ticket
+    help: Closes ticket(s)
     args:
       - name: ISSUES
         required: true    
+        repeat: true
     script: |
       for issue in {{range args.ISSUES}}{{.}} {{end}}; do
         {{jira}} trans --noedit Resolve $issue
